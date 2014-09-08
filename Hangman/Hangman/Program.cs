@@ -10,6 +10,10 @@ namespace Hangman
     {
         static void Main(string[] args)
         {
+            Console.WindowHeight = 40;
+            int width = Console.WindowWidth;
+            width = width + 20;
+            Console.WindowWidth = width;
             Hangman();
             Console.ReadKey();
         }
@@ -21,8 +25,8 @@ namespace Hangman
             Console.WriteLine("Welcome to the game, " + name + "!");
             Console.WriteLine("\n\n You will be playing Hangman today!. If you haven't played, you will be guessing letters of a randomly generated word until you can guess the full word, or all of the letters. \n\n\n\n");
 
-            string[] words = new string[30] {"abyss", "akimbo", "avenue", "awkward", "axolotl", "buxom", "caliph", "crypt", "cycle", "curacao", "dirndl", "euouae", "fjord", "flyby", "fuchsia", 
-                "giaour", "glyph", "gnarly", "gnostic", "gypsum", "iatrogenic", "jinx", "jukebox", "kayak", "kitsch", "klutz", "lymph", "mnemonic", "naphtha", "onyx"};
+            string[] words = new string[34] {"abyss", "akimbo", "avenue", "awkward", "axolotl", "bacon", "boobs", "buxom", "caliph", "crypt", "cycle", "curacao", "dirndl", "euouae", "fjord", "flyby", "fuchsia", 
+                "giaour", "glyph", "gnarly", "gnostic", "gypsum", "iatrogenic", "jinx", "jukebox", "kayak", "pikachu", "kitsch", "klutz", "lymph", "mnemonic", "naphtha", "onyx", "aesthetic"};
 
             Random soHung = new Random();
 
@@ -41,12 +45,13 @@ namespace Hangman
                Console.WriteLine(masky);
                Console.WriteLine();
                string guess = Console.ReadLine().ToLower();
-
+               
                if (guess.Length == 1)
                {
                    //letter guess
                    if (randomWord.Contains(guess))
                    {
+                       Console.Clear();
                        Console.WriteLine("Good job! Keep guessing.\n");
                        lettersGuessed += guess;
                        Console.WriteLine("You have " + guessesLeft + " guesses left.\n");
@@ -54,6 +59,7 @@ namespace Hangman
                    }
                    else
                    {
+                       Console.Clear();
                        Console.WriteLine("Terrible. You're so bad. Keep going.\n\n");
                        guessesLeft--;
                        Console.WriteLine("You have " + guessesLeft + " guesses left.\n");
@@ -67,12 +73,22 @@ namespace Hangman
                    //word guess
                    if (guess == randomWord)
                    {
-                       Console.WriteLine("You win!");
-                       Console.WriteLine("You had " + guessesLeft + " guesses left.\n");
+                       Console.Clear();
+                       Console.WriteLine(@"__   _______ _   _   _    _ _____ _   _ 
+\ \ / /  _  | | | | | |  | |_   _| \ | |
+ \ V /| | | | | | | | |  | | | | |  \| |
+  \ / | | | | | | | | |/\| | | | | . ` |
+  | | \ \_/ / |_| | \  /\  /_| |_| |\  |
+  \_/  \___/ \___/   \/  \/ \___/\_| \_/
+                                        
+                                        " + "\n\n");
+                       Console.WriteLine("You had " + guessesLeft + " guess(es) left.\n");
+                       Console.WriteLine("The word to guess was: " + randomWord);
                        won = true;
                    }
                    else if (guess != randomWord)
                    {
+                       Console.Clear();
                        Console.WriteLine("Incorrect, guess again.\n");
                        guessesLeft--;
                        Console.WriteLine("You have " + guessesLeft + " guesses left.\n");
@@ -80,9 +96,160 @@ namespace Hangman
                    }
                    
                }
+               if (guessesLeft == 0)
+               {
+                   Console.Clear();
+                   won = true;
+                   Console.WriteLine(@"__   _______ _   _   _____ _   _ _____  _   __  _____  _____  ___  ____   _ _____  _   _ 
+\ \ / /  _  | | | | /  ___| | | /  __ \| | / / /  ___||  _  | |  \/  | | | /  __ \| | | |
+ \ V /| | | | | | | \ `--.| | | | /  \/| |/ /  \ `--. | | | | | .  . | | | | /  \/| |_| |
+  \ / | | | | | | |  `--. \ | | | |    |    \   `--. \| | | | | |\/| | | | | |    |  _  |
+  | | \ \_/ / |_| | /\__/ / |_| | \__/\| |\  \ /\__/ /\ \_/ / | |  | | |_| | \__/\| | | |
+  \_/  \___/ \___/  \____/ \___/ \____/\_| \_/ \____/  \___/  \_|  |_/\___/ \____/\_| |_/
+                                                                                         
+                                                                                         " + "\n\n");
+                   Console.WriteLine("The word to guess was: " + randomWord);
+               }
+               if (guessesLeft == 5)
+               {
+                   Console.WriteLine(@"
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|");
+               }
+               else if (guessesLeft == 4)
+               {
+                   Console.WriteLine(@"  
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/| /¯)
+           |/|/\/
+           |/|\/");
+               }
+               else if (guessesLeft == 3)
+               {
+                   Console.WriteLine(@"    
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/| /¯)
+           |/|/\/
+           |/|\/
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+");
+               }
+               else if (guessesLeft == 2)
+               {
+                   Console.WriteLine(@"   
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/| /¯)
+           |/|/\/
+           |/|\/
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          /¯¯/\
+         / ,^./\
+        / /   \/\
+       / /     \/\");
+               }
+               else if (guessesLeft == 1)
+               {
+                   Console.WriteLine(@"   
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/| /¯)
+           |/|/\/
+           |/|\/
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          /¯¯/\
+         / ,^./\
+        / /   \/\
+       / /     \/\
+      ( (       )/)
+      | |       |/|
+      | |       |/|
+      | |       |/|");
+               }
+               else if (guessesLeft == 0)
+               {
+                   Console.WriteLine(@"    
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/|
+           |/| /¯)
+           |/|/\/
+           |/|\/
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          (¯¯¯)
+          /¯¯/\
+         / ,^./\
+        / /   \/\
+       / /     \/\
+      ( (       )/)
+      | |       |/|
+      | |       |/|
+      | |       |/|
+      ( (       )/)
+       \ \     / /
+        \ `---' /
+         `-----' ");
+               }
+               if (masky == randomWord)
+               {
+                   Console.Clear();
+                       Console.WriteLine(@"__   _______ _   _   _    _ _____ _   _ 
+\ \ / /  _  | | | | | |  | |_   _| \ | |
+ \ V /| | | | | | | | |  | | | | |  \| |
+  \ / | | | | | | | | |/\| | | | | . ` |
+  | | \ \_/ / |_| | \  /\  /_| |_| |\  |
+  \_/  \___/ \___/   \/  \/ \___/\_| \_/
+                                        
+                                        " + "\n\n");
+                       Console.WriteLine("You had " + guessesLeft + " guess(es) left.\n");
+                       Console.WriteLine("The word to guess was: " + randomWord);
+                       won = true;
+               }
+
+
                
             }
-
+            
             
 
         }
@@ -98,7 +265,7 @@ namespace Hangman
 
                 if (lettersGuessed.Contains(letter.ToString()))
                 {
-                    returnString = returnString + letter + " ";
+                    returnString = returnString + letter;
                 }
                 else
                 {
