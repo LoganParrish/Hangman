@@ -4,3 +4,5 @@ C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\bin\Debug\Hangman
 C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\obj\Debug\Hangman.csprojResolveAssemblyReference.cache
 C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\obj\Debug\Hangman.exe
 C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\obj\Debug\Hangman.pdb
+C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\bin\Debug\EntityFramework.dll
+C:\Users\Technologist\Documents\GitHub\Hangman\Hangman\Hangman\bin\Debug\EntityFramework.xml

@@ -10,11 +10,46 @@ namespace Hangman
     {
         static void Main(string[] args)
         {
+            int wins = -0;
+            Winnings Win = new Winnings(wins);
+
+
             Console.WindowHeight = 40;
             int width = Console.WindowWidth;
             width = width + 20;
             Console.WindowWidth = width;
-            Hangman();
+
+
+            while (Win.KeepGoing == true)
+            {
+                Console.WriteLine("Total games won : " + wins);
+                Console.WriteLine("Type 'yes' to begin / keep playing.");
+                string playerInput = Console.ReadLine();
+                if (playerInput == "yes")
+                {
+                    Hangman();
+                    Win.KeepGoing = false;
+                }
+                else
+                {
+                    Win.KeepGoing = false;
+                    Console.WriteLine("Cya next time!");
+                }
+                Console.WriteLine("Did you win? Be honest! yes / no");
+                string playerAnswer = Console.ReadLine();
+                if (playerAnswer == "yes")
+                {
+                    wins++;
+                    Win.KeepGoing = true;
+                }
+                else
+                {
+                    Win.KeepGoing = false;
+                }
+            }
+            AddHighScore(wins);
+            DisplayHighScore();
+            
             Console.ReadKey();
         }
         static void Hangman()
@@ -70,7 +105,7 @@ namespace Hangman
                }
                else
                {
-                   //word guess
+                   //word guesseddddddddd
                    if (guess == randomWord)
                    {
                        Console.Clear();
@@ -85,6 +120,7 @@ namespace Hangman
                        Console.WriteLine("You had " + guessesLeft + " guess(es) left.\n");
                        Console.WriteLine("The word to guess was: " + randomWord);
                        won = true;
+                       
                    }
                    else if (guess != randomWord)
                    {
@@ -109,6 +145,7 @@ namespace Hangman
                                                                                          
                                                                                          " + "\n\n");
                    Console.WriteLine("The word to guess was: " + randomWord);
+                   break;
                }
                if (guessesLeft == 5)
                {
@@ -275,6 +312,40 @@ namespace Hangman
             }
             return returnString;
             }
+        static void AddHighScore(int playerScore)
+        {
+            Console.WriteLine("\n\nAdd your name to the highscores: ");
+            string playerName = Console.ReadLine();
+
+            LoganEntities db = new LoganEntities();
+
+            HighScore newHighScore = new HighScore();
+            newHighScore.Date = DateTime.Now;
+            newHighScore.Name = playerName;
+            newHighScore.Game = "Hangman";
+            newHighScore.Score = playerScore;
+
+            db.HighScores.Add(newHighScore);
+
+            db.SaveChanges();
+        }
+        static void DisplayHighScore()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("==================== HIGH SCORES ====================");
+            Console.WriteLine("=====================================================\n\n");
+            Console.ResetColor();
+
+            LoganEntities db = new LoganEntities();
+            List<HighScore> highScoreList = db.HighScores.Where(x => x.Game == "Hangman").OrderByDescending(x => x.Score).Take(10).ToList();
+
+            foreach (HighScore highScore in highScoreList)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("{0}. {1} - {2} Games won - {3}", highScoreList.IndexOf(highScore) + 1, highScore.Name, highScore.Score, highScore.Date.Value.ToShortDateString());
+                Console.ResetColor();
+            }
+        }
 
             
         
