@@ -337,7 +337,7 @@ namespace Hangman
             Console.ResetColor();
 
             spLoganEntities db = new spLoganEntities();
-            List<HighScore> highScoreList = db.HighScores.Where(x => x.Game == "Hangman").OrderByDescending(x => x.Score).Take(10).ToList();
+            List<HighScore> highScoreList = db.HighScores.Where(x => x.Game == "Hangman").OrderBy(x => x.Score).Take(10).ToList();
 
             foreach (HighScore highScore in highScoreList)
             {
