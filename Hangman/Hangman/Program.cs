@@ -317,10 +317,10 @@ namespace Hangman
             Console.WriteLine("\n\nAdd your name to the highscores: ");
             string playerName = Console.ReadLine();
 
-            LoganEntities db = new LoganEntities();
+            spLoganEntities db = new spLoganEntities();
 
             HighScore newHighScore = new HighScore();
-            newHighScore.Date = DateTime.Now;
+            newHighScore.DateCreated = DateTime.Now.ToString();
             newHighScore.Name = playerName;
             newHighScore.Game = "Hangman";
             newHighScore.Score = playerScore;
@@ -336,13 +336,13 @@ namespace Hangman
             Console.WriteLine("=====================================================\n\n");
             Console.ResetColor();
 
-            LoganEntities db = new LoganEntities();
+            spLoganEntities db = new spLoganEntities();
             List<HighScore> highScoreList = db.HighScores.Where(x => x.Game == "Hangman").OrderByDescending(x => x.Score).Take(10).ToList();
 
             foreach (HighScore highScore in highScoreList)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("{0}. {1} - {2} Games won - {3}", highScoreList.IndexOf(highScore) + 1, highScore.Name, highScore.Score, highScore.Date.Value.ToShortDateString());
+                Console.WriteLine("{0}. {1} - {2} Games won - {3}", highScoreList.IndexOf(highScore) + 1, highScore.Name, highScore.Score, highScore.DateCreated);
                 Console.ResetColor();
             }
         }

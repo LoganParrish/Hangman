@@ -13,10 +13,10 @@ namespace Hangman
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LoganEntities : DbContext
+    public partial class spLoganEntities : DbContext
     {
-        public LoganEntities()
-            : base("name=LoganEntities")
+        public spLoganEntities()
+            : base("name=spLoganEntities")
         {
         }
     
