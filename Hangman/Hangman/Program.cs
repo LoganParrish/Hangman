@@ -19,36 +19,37 @@ namespace Hangman
             width = width + 20;
             Console.WindowWidth = width;
 
+            Hangman();
 
-            while (Win.KeepGoing == true)
-            {
-                Console.WriteLine("Total games won : " + wins);
-                Console.WriteLine("Type 'yes' to begin / keep playing.");
-                string playerInput = Console.ReadLine();
-                if (playerInput == "yes")
-                {
-                    Hangman();
-                    Win.KeepGoing = false;
-                }
-                else
-                {
-                    Win.KeepGoing = false;
-                    Console.WriteLine("Cya next time!");
-                }
-                Console.WriteLine("Did you win? Be honest! yes / no");
-                string playerAnswer = Console.ReadLine();
-                if (playerAnswer == "yes")
-                {
-                    wins++;
-                    Win.KeepGoing = true;
-                }
-                else
-                {
-                    Win.KeepGoing = false;
-                }
-            }
-            AddHighScore(wins);
-            DisplayHighScore();
+            //while (Win.KeepGoing == true)
+            //{
+            //    Console.WriteLine("Total games won : " + wins);
+            //    Console.WriteLine("Type 'yes' to begin / keep playing.");
+            //    string playerInput = Console.ReadLine();
+            //    if (playerInput == "yes")
+            //    {
+            //        Hangman();
+            //        Win.KeepGoing = false;
+            //    }
+            //    else
+            //    {
+            //        Win.KeepGoing = false;
+            //        Console.WriteLine("Cya next time!");
+            //    }
+            //    Console.WriteLine("Did you win? Be honest! yes / no");
+            //    string playerAnswer = Console.ReadLine();
+            //    if (playerAnswer == "yes")
+            //    {
+            //        wins++;
+            //        Win.KeepGoing = true;
+            //    }
+            //    else
+            //    {
+            //        Win.KeepGoing = false;
+            //    }
+            //}
+            //AddHighScore(wins);
+            //DisplayHighScore();
             
             Console.ReadKey();
         }
