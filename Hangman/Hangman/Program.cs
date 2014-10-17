@@ -13,11 +13,10 @@ namespace Hangman
             int wins = -0;
             Winnings Win = new Winnings(wins);
 
-
-            Console.WindowHeight = 40;
-            int width = Console.WindowWidth;
-            width = width + 20;
+            Console.WindowHeight = 50;
+            int width = Console.WindowWidth * 2;
             Console.WindowWidth = width;
+            
 
             Hangman();
 
